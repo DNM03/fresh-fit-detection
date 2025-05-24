@@ -92,6 +92,16 @@ async def detect_fruit_veggie(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error during prediction: {str(e)}")
 
+
+@app.get("/cron-job")
+async def cron_job():
+    try:
+        print("Cron job executed successfully.")
+        return {"message": "Cron job executed successfully."}
+    except Exception as e:
+        print(f"Error executing cron job: {e}")
+        return {"message": "Error executing cron job"}
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
